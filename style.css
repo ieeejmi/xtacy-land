@@ -13,11 +13,13 @@ section {
     padding: 1em;
 }
 .container {
+    margin: auto auto;
     padding: 1em;
     width: 100vw;
     position: relative;
     display: flex;
     flex-direction: column;
+    max-width: 1400px;
 }
 
 .rotor{
@@ -26,19 +28,11 @@ section {
 }
 .rotary {
     position: absolute;
-    padding: 1em;
+    padding: 0.5em;
     background-color: #000; 
-    width: 100px;
-    height: 25px;
+    width: 60px;
+    height: 10px;
     right: 2em;
-    animation: rotor 5000ms ease-in-out infinite alternate-reverse;
-}
-@keyframes rotor {
-    0% { width: 20px }
-    20% { width: 100px }
-    40% { width: 70px }
-    60% { width: 40px }
-    100% { width: 20px }
 }
 
 /* ============================ */
@@ -73,11 +67,6 @@ section {
     font-weight: 600;
 } .tag #dates {
     font-weight: 400;
-}
-@media (min-width: 600px) {
-    .tag{
-        margin-left: 5em;
-    }
 }
 .org .bold {
     font-weight: 600;
