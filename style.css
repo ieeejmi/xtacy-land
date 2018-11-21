@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,800,900');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+section {
+    padding: 1em;
+}
+.container {
+    padding: 1em;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.rotor{
+    height: 25vh;
+    /* position: relative; */
+}
+.rotary {
+    position: absolute;
+    padding: 1em;
+    background-color: #000; 
+    width: 100px;
+    height: 25px;
+    right: 2em;
+    animation: rotor 5000ms ease-in-out infinite alternate-reverse;
+}
+@keyframes rotor {
+    0% { width: 20px }
+    20% { width: 100px }
+    40% { width: 70px }
+    60% { width: 40px }
+    100% { width: 20px }
+}
+
+/* ============================ */
+.mid {
+    height: 50vh;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+}
+.main { margin: auto auto }
+.title {
+    font-weight: 600;
+    font-size: 4em;
+}
+.subtitle {
+    margin-top: 1em;
+    font-weight: 300;
+    font-size: 0.9em;
+}
+/* ============================ */
+
+.details {
+    margin-left: 1em; 
+    height: auto;
+    font-weight: 400;
+    font-size: 0.75em;
+    line-height: 0.35em;
+}
+.tag {
+    font-weight: 600;
+} .tag #dates {
+    font-weight: 400;
+}
+@media (min-width: 600px) {
+    .tag{
+        margin-left: 5em;
+    }
+}
+.org .bold {
+    font-weight: 600;
+}
+#contact {
+    margin-top: 5em;
+    text-align: right;
+    font-size: 0.8em;
+}
