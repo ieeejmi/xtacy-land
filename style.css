@@ -23,7 +23,7 @@ section {
 }
 
 .rotor{
-    height: 25vh;
+    height: 20vh;
     /* position: relative; */
 }
 .rotary {
@@ -48,12 +48,53 @@ section {
 .title {
     font-weight: 600;
     font-size: 4em;
+    position: relative;
 }
 .subtitle {
-    margin-top: 1em;
+    margin-top: 0.5em;
     font-weight: 300;
-    font-size: 0.9em;
+    font-size: 0.25em;
 }
+
+#name {
+    position: relative;
+    left: 0;
+    animation: shift 500ms ease;
+}
+@keyframes shift {
+    from {
+        top: 0.5em;
+        opacity: 0;
+    }
+    to { 
+        top: 0; 
+        opacity: 1;
+    }
+}
+
+#purda {
+    position: absolute;
+    width: 105%;
+    height: 52.5%;
+    top: -0.1em;
+    left: -0.5em;
+    background-color: rgb(255, 225, 0);
+    z-index: -1;
+    opacity: 0.75;
+    animation: reveal 500ms ease;
+}
+@keyframes reveal {
+    from {
+        width: 0;
+        height: 0;
+    }
+    to {
+        width: 105%;
+        height: 52.5%;
+    }
+}
+
+
 /* ============================ */
 
 .details {
