@@ -24,6 +24,7 @@ section {
 
 .rotor{
     height: 20vh;
+    padding: 1em;
     /* position: relative; */
 }
 .rotary {
@@ -37,7 +38,7 @@ section {
 
 /* ============================ */
 .mid {
-    height: 50vh;
+    height: 45vh;
     position: relative;
     text-align: center;
     display: flex;

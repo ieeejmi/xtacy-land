@@ -1,0 +1,25 @@
+{
+  "name": "xtacy-land",
+  "version": "1.0.0",
+  "description": "This is the temporary landing page for IEEE JMI's techno-cultural festival, Xtacy.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IEEEJMI/xtacy-land.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IEEEJMI/xtacy-land/issues"
+  },
+  "homepage": "https://github.com/IEEEJMI/xtacy-land#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "firebase": "^5.7.0"
+  }
+}

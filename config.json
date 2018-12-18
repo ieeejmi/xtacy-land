@@ -1,0 +1,14 @@
+{
+    "domain" : "xtacy.org",
+    "csrfTokenName" : "_xta_srf-tk:",
+    "csrfTokenNameKey" : "_tk_nmk-del",
+    "clientKey" : "clientKey@xtacy.org",
+    "firebase" : {
+        "apiKey": "AIzaSyADVyiiQYZMWqsK-oAGY0jPoslrNUNzDFw",
+        "authDomain": "xtacy-web.firebaseapp.com",
+        "databaseURL": "https://xtacy-web.firebaseio.com",
+        "projectId": "xtacy-web",
+        "storageBucket": "xtacy-web.appspot.com",
+        "messagingSenderId": "33903971046"
+    }
+}

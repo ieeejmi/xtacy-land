@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1c1c1c">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-database.js"></script>
+    {{!-- <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script> --}}
+
+    <link rel="shortcut icon" type="image/png" href="../static/img/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="http://xtacy.org/_file/GET/preset/cm9vdA/favicon/"/>
+
+    <script src="../static/js/secu.js"></script>
+    <script src="./static/js/database.js"></script>
+    <script src="./static/js/config.js"></script>
+
+    <script>
+        (()=>{
+            validateToken()
+                .then((r)=>{
+                    if (r==='CSR_TOKEN_VALID') {
+                        generateSecurityFluff(4);
+                        console.log('SR Tokens Verified');
+                    }
+                }).catch((e)=>{
+                    console.log(e);
+                    if (e==='CSR_TOKEN_INVALID') {
+                        alert(`Security Check Failed! You might be browsing a malicious site or might have clicked on a bad link.`);
+                        window.location = '/';
+                    }
+                });
+        })()
+    </script>
+</head>
+<body>
+    {{{ body }}}
+</body>
+</html>
