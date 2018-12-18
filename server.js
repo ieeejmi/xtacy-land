@@ -25,9 +25,9 @@ homepage.set('view engine', 'hbs')
 homepage.engine('hbs', hbs({
     defaultLayout: 'main',
     extname: 'hbs',
-    layoutsDir: __dirname + '\\public\\layouts',
+    layoutsDir: __dirname + '/public/layouts',
     partialsDir: [
-        __dirname + '\\public\\partials'
+        __dirname + '/public/partials'
     ]
 }))
 
