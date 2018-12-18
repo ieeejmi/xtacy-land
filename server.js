@@ -8,7 +8,7 @@ const hbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const ServerConfig = require('./config.json');
 
 const homepage = express();
