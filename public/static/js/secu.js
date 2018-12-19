@@ -1,7 +1,7 @@
 function validateToken() {
     return new Promise((resolve, reject)=>{
         const valReq = new XMLHttpRequest();
-        valReq.open('POST', 'http://xtacy.org/_secu/csrtoken/', true);
+        valReq.open('POST', 'https://xtacy.org/_secu/csrtoken/', true);
         valReq.setRequestHeader('Content-Type', 'application/json');
 
         var key = localStorage.getItem( config.csrfTokenNameKey );    
