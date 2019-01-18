@@ -6,14 +6,21 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const path = require('path');
+const fs = require('fs');
+const vhost = require('vhost');
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const ServerConfig = require('./config.json');
+const __domain = require('./config.json').domain;
 
+const xtacy = express();
 const homepage = express();
+const cdn = express();
 
 const Security = require('./util/Security');
+const ContentDelivery = require('./util/ContentDelivery');
 
 homepage.use(bodyParser.json())
 homepage.use(bodyParser.urlencoded({ extended: true }))
@@ -31,7 +38,20 @@ homepage.engine('hbs', hbs({
     ]
 }))
 
-homepage.listen(PORT, ()=>{
+homepage.use('/static', express.static( path.join(__dirname, 'homepage', 'static') ))
+
+cdn.use(bodyParser.json())
+cdn.use(bodyParser.urlencoded({ extended: true }))
+cdn.use(express.json())
+cdn.use(express.urlencoded({ extended: true }))
+cdn.use(express.static( path.join(__dirname, 'cdn', 'root') ))
+
+// ----------- Virtual Host ----------
+xtacy.use(vhost(__domain, homepage))
+xtacy.use(vhost('www.' +  __domain, homepage))
+xtacy.use(vhost('cdn.' +  __domain, cdn))
+
+xtacy.listen(PORT, ()=>{
     console.log('\tServer Running');
 })
 
@@ -43,51 +63,85 @@ homepage.get('/', (req,res)=>{
     res.render('index', { 'title' : 'HOME' })
 });
 
-homepage.post('/_register/:ckey/:mode/', (req,res)=>{
-    // Example of NON-PAGE REQUEST
-    Security.validateCSRFTokens(req.body.key, req.body.token)
+homepage.get('/_secu/csrtoken/', (req,res)=>{
+    // == Webpage CSRF Token Generation == //
+    Security.generateCSRFTokens()
         .then((result)=>{
-            // do whatever has to be done
-            res.send(200)
+            res.json({ key : result.key, token : result.token })
         }).catch((error)=>{
             console.error(error)
-            res.send(500)
+            res.sendStatus(500)
         })
-});
-
-homepage.get('/_file/GET/:type/:path/:filename/', (req,res)=>{
-    // FILE DELIVERY NETWORK
-    let __path = Buffer.from(req.params.path, 'base64').toString('ascii');
-    if(req.params.type==='preset' && __path==='root') {
-        switch(req.params.filename) {
-            case 'favicon':
-                res.sendFile( path.resolve(__dirname, 'public/static/img', 'favicon.png') )
-                break;
-            default:
-                res.send(404)
-        }
-    } else {
-        res.send(500)
-    }
-});
-
-homepage.get('/_secu/firebase/:ckey/:mode/', (req,res)=>{
-    // == GET Firebase Credentials == //
-    var ckey = Buffer.from(req.params.ckey, 'base64').toString('ascii')
-    if(req.params.mode==='GET' && ckey===require('./config.json').clientKey){
-        res.json(ServerConfig.firebase)
-    } else {
-        res.send(500)
-    }
 });
 
 homepage.post('/_secu/csrtoken/', (req,res)=>{
     // == Webpage CSRF Token Validation == //
     Security.validateCSRFTokens(req.body.key, req.body.token)
         .then((result)=>{
-            res.json({ validation : result })
+            if (result) {
+                res.json({ status : true })
+            } else {
+                Security.generateCSRFTokens().then((result)=>{
+                    res.json({ status : false, key : result.key, token : result.token })
+                }).catch((error)=>{
+                    console.error(error)
+                    res.sendStatus(500)
+                })
+            }
         }).catch((error)=>{
             console.error(error)
-            res.send(500)
+            res.sendStatus(403)
+        })
+});
+
+// =============================================================================================
+
+cdn.get('/', (req,res)=>{
+    res.sendFile( path.resolve(__dirname, 'cdn', 'index.html') )
+});
+
+cdn.get('/p/:file/', (req,res)=>{
+    if (req.params.file=='cdnLookup.json') res.sendStatus(403)
+    switch(req.params.file) {
+        case 'faviconpng':
+            res.type('image/png')
+            res.sendFile( path.resolve(__dirname, 'cdn/presets', 'favicon.png') )
+            break
+        case 'faviconico':
+            res.type('image/x-icon')
+            res.sendFile( path.resolve(__dirname, 'cdn/presets', 'favicon.ico') )
+            break
+        default:
+            res.sendStatus(404)
+    }
+});
+
+cdn.get('/d/:fileRef/', (req,res)=>{
+    ContentDelivery.Lookup(req.params.fileRef)
+        .then(({ filepath, filename, contentType })=>{
+            res.type(contentType)
+            res.sendFile( path.join(__dirname, 'cdn', filepath, filename) )
+        }).catch((result, err)=>{
+            console.error(result, err)
+            res.sendStatus(500)
+        })
+});
+
+cdn.put('/u/:filepath/:filename/', (req,res)=>{
+    if (req.params.filename=='cdnLookup.json') res.sendStatus(403)
+    let __filepath;
+    try {
+        __filepath = Buffer.from(req.params.filepath, 'base64').toString('ascii')
+    } catch(err) {
+        res.sendStatus(403)
+    }
+    
+    // Upload file
+    ContentDelivery.Upload(req.body.file, rer.params.filename, __filepath, 
+        req.body.contentType, req.body.metadata)
+        .then((fileRef)=>{
+            res.json({ ref: fileRef })
+        }).catch((err)=>{
+            res.status(403).send(err)
         })
 });

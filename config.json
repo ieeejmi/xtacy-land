@@ -2,9 +2,11 @@
     "domain" : "xtacy.org",
     "csrfTokenName" : "_xta_srf-tk:",
     "csrfTokenNameKey" : "_tk_nmk-del",
-    "clientKey" : "clientKey@xtacy.org",
+    "clientKeyPlaintext": "cLi#ntK3y@xTacy&org",
+    "clientKey": "29e08c47ff8a12ad6885fcb1ca99568b0016c541c5657c7956b0a4159fc3c4f1",
+    "firebaseClientAPIKey": "AIzaSyAd17pI-aG3Mx8x_HXNz4lQ7VWRWnSgy4E",
+    "firebaseServerAPIKey": "AIzaSyDvu4G7Z62WqJfb-aMwQa2YGOCGSTUnxtk",
     "firebase" : {
-        "apiKey": "AIzaSyADVyiiQYZMWqsK-oAGY0jPoslrNUNzDFw",
         "authDomain": "xtacy-web.firebaseapp.com",
         "databaseURL": "https://xtacy-web.firebaseio.com",
         "projectId": "xtacy-web",

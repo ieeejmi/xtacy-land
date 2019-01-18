@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/IEEEJMI/xtacy-land#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "firebase": "^5.7.0"
+    "firebase": "^5.7.0",
+    "vhost": "^3.0.2"
   }
 }

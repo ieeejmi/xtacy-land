@@ -1,0 +1,69 @@
+{
+    "writeLock": false,
+    "fileRefNumber": 1,
+    "$schema": [
+        {
+            "fileRef": "base36",
+            "fileId": 37585,
+            "filename": "Filename.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata": {
+                "size": "",
+                "createdOn": "",
+                "authors": "and other small data can be added"
+            }
+        }
+    ],
+    "files": [
+        {
+            "fileRef": "0t01",
+            "fileId": 37585,
+            "filename": "Logo.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata": {}
+        },
+        {
+            "fileRef": "5p02",
+            "fileId": 265682,
+            "filename": "JMI Logo.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata" : {}
+        },
+        {
+            "fileRef": "5p03",
+            "fileId": 265683,
+            "filename": "thumb.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata" : {}
+        },
+        {
+            "fileRef": "5p04",
+            "fileId": 265684,
+            "filename": "title.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata" : {}
+        },
+        {
+            "fileRef": "5p05",
+            "fileId": 265685,
+            "filename": "xtacy.png",
+            "contentType": "image/png",
+            "filepath": "root",
+            "metadata" : {}
+        },
+        {
+            "fileRef": "5p06",
+            "fileId": 265686,
+            "filename": "About.docx",
+            "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "filepath": "root",
+            "metadata" : {}
+        }
+    ]
+}
+
