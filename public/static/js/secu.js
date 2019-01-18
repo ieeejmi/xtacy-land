@@ -5,14 +5,14 @@ function validateToken() {
                 resolve('CSR_TIME_VALID');
         } else {
             const valReq = new XMLHttpRequest();
-            valReq.open('POST', 'http://xtacy.org/_secu/csrtoken/', true);
+            valReq.open('POST', 'https://xtacy.org/_secu/csrtoken/', true);
             valReq.setRequestHeader('Content-Type', 'application/json');
 
             var key = localStorage.getItem( config.csrfTokenNameKey );
             var token = localStorage.getItem( config.csrfTokenName+key );
             if(key===null) {
                 const genTReq = new XMLHttpRequest();
-                genTReq.open('GET', 'http://xtacy.org/_secu/csrtoken/', true);
+                genTReq.open('GET', 'https://xtacy.org/_secu/csrtoken/', true);
                 genTReq.send();
                 genTReq.onreadystatechange = () => {
                     if(genTReq.readyState===4 && genTReq.status===200) {
